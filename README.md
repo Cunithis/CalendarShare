@@ -29,12 +29,21 @@
 
 ## **Screenshots**
 
-Add screenshots inside a `docs/` directory and reference them here:
 
 
-![Screenshot 1](docs/screen1.png)  
-![Screenshot 2](docs/screen2.png)  
-![Screenshot 3](docs/screen3.png)  
+<p float="left">
+  <img src="CalendarSharing/docs/IMG_8278.PNG" width="250" />
+  <img src="CalendarSharing/docs/IMG_8279.PNG" width="250" />
+  <img src="CalendarSharing/docs/IMG_8272.PNG" width="250" />
+  <img src="CalendarSharing/docs/IMG_8273.PNG" width="250" />
+  <img src="CalendarSharing/docs/IMG_8275.PNG" width="250" />
+  <img src="CalendarSharing/docs/IMG_8276.PNG" width="250" />
+  <img src="CalendarSharing/docs/IMG_8277.PNG" width="250" />
+  <img src="CalendarSharing/docs/IMG_8280.PNG" width="250" />
+
+
+</p>
+
 
 
 ## **Architecture Overview**
@@ -85,18 +94,50 @@ Required modules:
 
 ### 5. Firestore Data Model
 
+## Firestore Data Model
 
+```text
 users/{uid}
-   email
-   name
-   groups: [groupId]
-   calendar/{eventId}
+    id: String
+    email: String
+    name: String
+    profilePicture: String
+    groups: [String]               // list of group IDs the user belongs to
 
+    calendar/{eventId}
+        id: String
+        title: String
+        occuringOnDays: [Int]
+        timeStart: Int
+        timeEnd: Int
+        name: String (optional)
+```
+
+```text
 groups/{groupId}
-   name
-   members: [uid]
-   proposals/{proposalId}
-   calendar/{eventId}
+    id: String
+    name: String
+    members: [String]              // list of user IDs in the group
+
+    calendar/{eventId}
+        id: String
+        title: String
+        occuringOnDays: [Int]
+        timeStart: Int
+        timeEnd: Int
+        name: String (optional)
+
+    proposals/{proposalId}
+        id: String
+        title: String
+        occuringOnDays: [Int]
+        timeStart: Int
+        timeEnd: Int
+        accepted: { uid: name }    // dictionary of accepted users
+        declined: { uid: name }    // dictionary of declined users
+        name: String (optional)
+```
+
 
 
 ## **Development Notes**
@@ -129,4 +170,6 @@ Handles:
 - Contribution guidelines  
 - Roadmap  
 - Additional screenshots  
-- Further caching optimizations  
+- Further caching optimizations
+- User view
+- More..
